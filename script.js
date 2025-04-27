@@ -44,17 +44,60 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Form submission handling
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    // const contactForm = document.querySelector('.contact-form');
+    // if (contactForm) {
+    //     contactForm.addEventListener('submit', function(e) {
+    //         e.preventDefault();
             
-            // Here you would typically send the form data to a server
-            // For now, we'll just show an alert
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
-        });
-    }
+    //         // Here you would typically send the form data to a server
+    //         // For now, we'll just show an alert
+    //         alert('Thank you for your message! I will get back to you soon.');
+    //         this.reset();
+    //     });
+    // }
+
+
+    // Form submission with email sending
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.textContent;
+
+        try {
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Using FormSubmit.co (free service) 
+            const response = await fetch('https://formsubmit.co/ajax/batisebatekle@gmail.com', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(Object.fromEntries(formData))
+            });
+
+            const result = await response.json();
+            
+            if (response.ok) {
+                alert('Message sent successfully! I will get back to you soon.');
+                this.reset();
+            } else {
+                throw new Error(result.message || 'Failed to send message');
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+            console.error('Submission error:', error);
+        } finally {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+}
 
     // Animation on scroll
     const animateOnScroll = function() {
