@@ -183,7 +183,7 @@ a:hover {
 .hero-image {
     flex: 1;
     display: flex;
-    justify-content: left;
+    justify-content: center;
 }
 
 .hero-image img {
@@ -204,6 +204,8 @@ a:hover {
 
 .about-text {
     flex: 2;
+    padding-right:30px;
+    padding-left: 30px;
 }
 
 .about-text p {
