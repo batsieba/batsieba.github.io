@@ -132,11 +132,13 @@ a:hover {
     min-height: 100vh;
     padding-top: 80px;
     background-color: var(--light-color);
-}
+} 
+
+
 
 .hero-content {
     flex: 1;
-    padding-left: 50px;
+    padding-left: 250px;
     justify-content: right;
 }
 
@@ -344,9 +346,15 @@ a:hover {
 
 /* Projects Section */
 .projects-grid {
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
     gap: 30px;
+    justify-content: center;
+    max-width: 1200px; /* Adjust this based on your design needs */
+    margin: 0 auto;
 }
 
 .project-card {
